@@ -1,123 +1,60 @@
-import { useRouter } from 'next/router'
-import { useState } from 'react'
-import { FiMenu, FiSearch } from 'react-icons/fi'
-import {
-  MdClose,
-  MdOutlineKeyboardArrowDown,
-  MdOutlineKeyboardArrowUp,
-} from 'react-icons/md'
-import LeftSidebar from './leftSidebar'
+const Navbar = () => {
 
-const Navbar = (props: {
-  user: { name: string; profilePhotoUrl: string }
-  onSearch: Function
-  showSearchBox: boolean
-}) => {
-  const [showModal, setShowModal] = useState<boolean>(false)
-  const [select, setSelect] = useState<boolean>(false)
-  const router = useRouter()
-  const profilePhoto: string = props.user.profilePhotoUrl
-    ? process.env.NEXT_PUBLIC_BASE_DOWNLOAD_URL + props.user.profilePhotoUrl
-    : `https://avatar.oxro.io/avatar.svg?name=${
-        props.user?.name ? props.user.name.replace(' ', '+') : ''
-      }`
-
-  const modal = (
-    <div className="fixed top-0 left-0 z-10 flex h-screen w-screen flex-col items-center justify-center overflow-auto bg-white p-5">
-      <MdClose
-        size={25}
-        className="fixed top-5 right-5"
-        onClick={() => {
-          setShowModal(false)
-        }}
-      />
-      <LeftSidebar />
-      <div className="w-full bg-white md:w-1/2"></div>
-    </div>
-  )
-
-  const logOut = () => {
-    document.cookie = 'accessToken= ; expires = Thu, 01 Jan 1970 00:00:00 GMT'
-    router.push({ pathname: '/auth/login' })
-  }
-
-  return (
-    <nav className="flex items-center justify-between border-b bg-white px-10 py-6">
-      {showModal ? modal : null}
-      <button
-        className="md:hidden"
-        onClick={() => {
-          setShowModal(true)
-        }}
-      >
-        <FiMenu size={25} />
-      </button>
-      <div
-        className={`${
-          !props.showSearchBox ? 'hidden' : ''
-        } flex w-96 items-center space-x-3 rounded-md bg-gray-100 px-4 py-2`}
-      >
-        <input
-          type="text"
-          placeholder="pesquisar"
-          className="w-full bg-gray-100 outline-none"
-          onChange={(e) => props.onSearch(e.target.value)}
-        />
-        <FiSearch />
-      </div>
-      <div></div>
-      <div className="flex">
-        <div className="flex items-center space-x-4">
-          <img
-            className="w-8 rounded-full"
-            src={profilePhoto}
-            alt="profile-photo"
-          />
-          <p className="hidden md:block">{props.user?.name}</p>
-        </div>
-        <div className="relative ml-2 inline-block text-left">
-          <button
-            onClick={() => {
-              setSelect(!select)
-            }}
-            type="button"
-            className="inline-flex w-full justify-center gap-2 rounded-md border border-gray-300  bg-white p-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-gray-100"
-            id="menu-button"
-            aria-expanded="true"
-            aria-haspopup="true"
-          >
-            {select ? (
-              <MdOutlineKeyboardArrowDown />
-            ) : (
-              <MdOutlineKeyboardArrowUp />
-            )}
-          </button>
-
-          {select ? (
+    return (
+        <div className="w-full text-gray-700 bg-white dark-mode:text-gray-200 dark-mode:bg-gray-800">
             <div
-              className="absolute right-0 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-              role="menu"
-              aria-orientation="vertical"
-              aria-labelledby="menu-button"
-            >
-              <div className="py-1" role="none">
-                <button
-                  onClick={() => {
-                    logOut()
-                  }}
-                  className="block w-56 px-4 py-2 text-sm text-gray-700 hover:bg-slate-100"
-                  role="menuitem"
-                  id="menu-item-0"
-                >
-                  Terminar Sessão
-                </button>
-              </div>
+                className="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8"> {/*x-data="{ open: false }"*/}
+                <div className="p-4 flex flex-row items-center justify-between">
+                    <a href="#"
+                       className="text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline">Flowtrail
+                        UI</a>
+                    <button className="md:hidden rounded-lg focus:outline-none focus:shadow-outline">
+                        <svg fill="currentColor" viewBox="0 0 20 20" className="w-6 h-6">
+                            <path fill-rule="evenodd"
+                                  d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
+                                  clip-rule="evenodd"></path>
+                            <path fill-rule="evenodd"
+                                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                  clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                </div>
+                <nav className="flex-col flex-grow pb-4 md:pb-0 hidden md:flex md:justify-end md:flex-row">
+                    <a className="px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-gray-200 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                       href="#">Blog</a>
+                    <a className="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                       href="#">Portfolio</a>
+                    <a className="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                       href="#">About</a>
+                    <a className="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                       href="#">Contact</a>
+                    <div className="relative">
+                        <button
+                            className="flex flex-row items-center w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:focus:bg-gray-600 dark-mode:hover:bg-gray-600 md:w-auto md:inline md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
+                            <span>Dropdown</span>
+                            <svg fill="currentColor" viewBox="0 0 20 20"
+                                 className="inline w-4 h-4 mt-1 ml-1 transition-transform duration-200 transform md:-mt-1">
+                                <path fill-rule="evenodd"
+                                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                      clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                        <div
+                             className="absolute right-0 w-full mt-2 origin-top-right rounded-md shadow-lg md:w-48">
+                            <div className="px-2 py-2 bg-white rounded-md shadow dark-mode:bg-gray-800">
+                                <a className="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                   href="#">Link #1</a>
+                                <a className="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                   href="#">Link #2</a>
+                                <a className="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                   href="#">Link #3</a>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
             </div>
-          ) : null}
         </div>
-      </div>
-    </nav>
-  )
+    );
 }
 
 export default Navbar

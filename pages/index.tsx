@@ -8,9 +8,11 @@ import HomeContainer from '../components/home/HomeContainer'
 const Home: NextPage = (props:any) => {
 
   return (
-    <div className="flex justify-center items-center h-screen">
-      <h1>Página Incial</h1>
-    </div>
+    <HomeContainer>
+      <div className="flex justify-center items-center h-screen">
+        <h1>Página Incial</h1>
+      </div>
+    </HomeContainer>
   )
 }
 

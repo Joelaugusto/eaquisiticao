@@ -24,19 +24,9 @@ const Home: NextPage = (props:any) => {
 
 
   return (
-
-    <HomeContainer user={props.user} onSearch={onSearch}>
-      <Head>
-        <title>Início</title>
-        <meta name="Início" content="Página Inicial" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <AdsContainer />
-      <PostContainer posts={posts} refresh={postsRefresh} user={props.user}/> 
-          <footer className="text w-full py-6 text-center">
-            <p className='text-gray-300'>Gestão de Cadeia de suplementos agricolas</p>
-          </footer>
-    </HomeContainer>
+    <div>
+      <p>Index</p>
+    </div>
   )
 }
 

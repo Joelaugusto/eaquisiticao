@@ -52,7 +52,7 @@ const Login: NextPage = (props: any) => {
       <span className="text-center">
         Não tem conta ainda?
         <Link href="/auth/register">
-          <span className="cursor-pointer gap-2 text-emerald-400">
+          <span className="cursor-pointer gap-2 text-blue-700">
             Criar conta
           </span>
         </Link>

@@ -8,7 +8,6 @@ import { FiLogIn } from 'react-icons/fi'
 //components
 import AuthContainer from '../../../components/auth/container'
 import Input from '../../../components/global/Input'
-import Separator from '../../../components/auth/separator'
 
 import Head from 'next/head'
 import Link from 'next/link'
@@ -78,11 +77,6 @@ const Register: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <AuthContainer title="Criar conta">
-        <button className="flex h-9 items-center justify-center gap-2.5 rounded-md border border-solid border-zinc-700 bg-white">
-          <FcGoogle size={20} />
-          <span className="text-sm">Iniciar com conta Google</span>
-        </button>
-        <Separator>OU</Separator>
         <Formik
           initialValues={{
             email: '',
@@ -138,7 +132,7 @@ const Register: NextPage = () => {
         <span className="text-center">
           Já tem conta?
           <Link href="/auth/login">
-            <span className="cursor-pointer gap-2 text-emerald-400">
+            <span className="cursor-pointer gap-2 text-blue-700">
               Iniciar sessão
             </span>
           </Link>

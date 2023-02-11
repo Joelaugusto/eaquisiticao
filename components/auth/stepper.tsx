@@ -9,7 +9,7 @@ const Stepper = (props: {
       components.push(
         <div
           // onClick={() => props.setStep(i)}
-          className="h-1.5 w-5 rounded-md bg-emerald-400"
+          className="h-1.5 w-5 rounded-md bg-blue-700"
           key={i}
         ></div>
       )

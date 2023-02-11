@@ -20,7 +20,7 @@ const Input = ({label, ...props}: any) => {
           <input
             {...field}
             {...props}
-            className="my-1 rounded-md border border-emerald-400 p-2 text-sm"
+            className="my-1 rounded-md border border-blue-700 p-2 text-sm"
           />
           {meta.touched && meta.error ? (
             <small className="h-1 text-red-500">{meta.error}</small>
@@ -39,7 +39,7 @@ const Input = ({label, ...props}: any) => {
           <select
             {...field}
             {...props}
-            className="my-1 rounded-md border border-emerald-400 p-2 text-sm"
+            className="my-1 rounded-md border border-blue-700 p-2 text-sm"
           >
             {props.options.map((option: string, index: number) => (
               <option key={index}>{option}</option>
@@ -57,7 +57,7 @@ const Input = ({label, ...props}: any) => {
       return (
         <button
           {...props}
-          className="my-1 mt-4 flex h-10 w-full items-center justify-center gap-2 rounded-md border bg-emerald-400 p-2 text-sm text-gray-100"
+          className="my-1 mt-4 flex h-10 w-full items-center justify-center gap-2 rounded-md border bg-blue-700 p-2 text-sm text-gray-100"
         >
           {props.value}
           {props.icon}
@@ -72,7 +72,7 @@ const Input = ({label, ...props}: any) => {
           </label>
           <input
             {...props}
-            className="my-1 rounded-md border border-emerald-400 p-2 text-sm"
+            className="my-1 rounded-md border border-blue-700 p-2 text-sm"
           />
         </div>
       )
@@ -86,7 +86,7 @@ const Input = ({label, ...props}: any) => {
           <textarea
             {...field}
             {...props}
-            className="my-1 rounded-md border border-emerald-400 p-2 text-sm h-48"
+            className="my-1 rounded-md border border-blue-700 p-2 text-sm h-48"
           />
           {meta.touched && meta.error ? (
             <small className="h-1 text-red-500">{meta.error}</small>

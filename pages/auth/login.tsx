@@ -2,13 +2,11 @@ import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import AuthContainer from '../../components/auth/container'
 import Input from '../../components/global/Input'
-import { FcGoogle } from 'react-icons/fc'
 import { FiLogIn } from 'react-icons/fi'
 import api from '../../utils/api'
 import * as Yup from 'yup'
 import Link from 'next/link'
 import cookies from '../../utils/cookies'
-import Separator from '../../components/auth/separator'
 import { toast } from 'react-toastify'
 import { Form, Formik } from 'formik'
 import validate from '../../utils/formValidate'
@@ -41,11 +39,6 @@ const Login: NextPage = (props: any) => {
 
   return (
     <AuthContainer title="Tela de Login!">
-      <button className="flex h-12 justify-center gap-2.5 rounded-md border border-solid border-zinc-700 bg-white p-2.5">
-        <FcGoogle size={24} />
-        <span>Login com conta Google</span>
-      </button>
-      <Separator>OU</Separator>
       <Formik
         initialValues={{ email: '', password: '' }}
         validationSchema={Yup.object({
@@ -75,7 +68,7 @@ const Login: NextPage = (props: any) => {
       <span className="text-center">
         Não tem conta ainda?
         <Link href="/auth/register">
-          <span className="cursor-pointer gap-2 text-emerald-400">
+          <span className="cursor-pointer gap-2 text-blue-700">
             Criar conta
           </span>
         </Link>
@@ -83,7 +76,7 @@ const Login: NextPage = (props: any) => {
       <span className="text-center">
         Esqueceu a senha?
         <Link href="/auth/recovery/reset">
-          <span className="cursor-pointer gap-2 text-emerald-400">
+          <span className="cursor-pointer gap-2 text-blue-700">
             Recuperar senha
           </span>
         </Link>

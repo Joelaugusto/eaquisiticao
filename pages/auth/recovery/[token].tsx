@@ -70,7 +70,7 @@ const Recovery: NextPage = (props: any) => {
       <span className="text-center">
         Voltar a tela de{' '}
         <Link href="/auth/login">
-          <span className="cursor-pointer text-emerald-400">Login</span>
+          <span className="cursor-pointer text-blue-700">Login</span>
         </Link>
       </span>
     </AuthContainer>

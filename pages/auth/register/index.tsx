@@ -18,6 +18,7 @@ import { useRouter } from 'next/router'
 import { Form, Formik } from 'formik'
 import * as Yup from 'yup'
 import validate from '../../../utils/formValidate'
+import cookies from "../../../utils/cookies";
 
 const Register: NextPage = () => {
   const router = useRouter()
@@ -26,44 +27,27 @@ const Register: NextPage = () => {
 
   const sendEmail = async (form: {
     email: string
-    phone: string
+    username: string
     password: string
   }) => {
     setIsSubmitting(true)
 
-    const { email, phone, password } = form
+    const { email, username, password } = form
 
     try {
-      await api.get(`users/unique?email=${email}&phone=${phone}`).then((e) => {
-        const email: string = e.data.email
-        const phone: string = e.data.phone
-
-        if (email) {
-          toast.error('Email já registrado! ')
-        }
-
-        if (phone) {
-          toast.error('Telefone já registrado!')
-        }
-
-        if (email || phone) {
-          setIsSubmitting(false)
-        }
-      })
 
       await toast.promise(
-        api.post(`users/verify-email`, { email, phone, password }).then(() => {
-          setTimeout(() => {
-            router.push('/auth/login')
-          }, 5000)
-        }),
-        {
-          pending: 'Efectuando o registro',
-          success:
-            'Uma messagem com instruições de conclusão de registro foi enviada para o seu email! 👌',
-          error: 'Falha ao efectuar registro! 🤯',
-        }
-      )
+        api.post(`users`, { email, username, password })
+            .then((data: any) => {
+              document.cookie = ''
+              cookies.setAccessToken(data.data.token.accessToken, data.data.token.tokenTtl)
+              router.push({ pathname: '/' })
+            }),
+          {
+            pending: 'Concluindo Registro!',
+            success: 'Registro concluído com sucesso! 👌',
+            error: 'Erro ao concluir o registro! 🤯',
+          })
     } finally {
       setIsSubmitting(false)
     }
@@ -80,13 +64,13 @@ const Register: NextPage = () => {
         <Formik
           initialValues={{
             email: '',
-            phone: '',
+            username: '',
             password: '',
             confirmPassword: '',
           }}
           validationSchema={Yup.object({
             email: validate.email,
-            phone: validate.phone,
+            username: validate.name,
             password: validate.password,
             confirmPassword: validate.passwordConfirm('password'),
           })}
@@ -102,9 +86,9 @@ const Register: NextPage = () => {
               />
               <Input
                 type="text"
-                placeholder="Introduza o seu número de celular"
-                label="Número de celular"
-                name="phone"
+                placeholder="Introduza o seu nome de utilizador"
+                label="Nome de utilizador"
+                name="username"
               />
             </div>
             <div className="grid md:grid-cols-2 md:gap-4">

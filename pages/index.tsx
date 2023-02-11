@@ -1,31 +1,15 @@
 import type { NextPage, GetServerSidePropsContext } from 'next'
 import Head from 'next/head'
 import { useState} from 'react'
-import AdsContainer from '../components/home/ads/container'
-import PostContainer from '../components/home/post/container'
 import session from '../utils/session'
 import api from '../utils/api'
 import HomeContainer from '../components/home/HomeContainer'
 
 const Home: NextPage = (props:any) => {
 
-  const [posts, setPosts] = useState<Array<any>>(props.posts)
-
-  const onSearch = async(value:string) => {
-
-    const data = await api.get('/posts?query=' + value)
-    setPosts(data.data.data)
-  }
-
-  const postsRefresh = async () => { 
-    const data = await api.get('/posts')
-    setPosts(data.data.data)
-  }
-
-
   return (
-    <div>
-      <p>Index</p>
+    <div className="flex justify-center items-center h-screen">
+      <h1>Página Incial</h1>
     </div>
   )
 }
@@ -45,13 +29,13 @@ export async function getServerSideProps(context:GetServerSidePropsContext) {
     }
   }
   
-  const posts = await api.get('/posts')
+  // const posts = await api.get('/posts')
 
 
   return {
     props: {
       user: user,
-      posts: posts.data.data,
+      // posts: posts.data.data,
     },
   }
 }
